@@ -1,27 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ReviewCard from './components/reviewcard.js'
+import ReviewCard from './components/reviewcard.js';
+import Navbar from './components/navbar.js';
+import Footer from './components/footer.js';
 class App extends Component {
   render() {
     return (
       <div>
-        <header>
-        <div className="navbar shadow-sm">
-            <a href="#" className="navbar-brand mr-auto">
-              <h1><strong>KinoPortal</strong></h1>
-            </a>
-            <form className="form-inline mt-20 mt-md-0">
-              <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"/>
-              <div className="input-group-append">
-                <button className="btn btn-outline-secondary ico-button" type="button" id="button-addon2"><i className="fas fa-search"></i></button>
-              </div>
-            </form>
-        </div>
-      </header>
-
       <main role="main">
-
+        <Navbar></Navbar>
         <section>
           <div className="container mt-3 mb-3 d-flex">
             <h3 className="highlight mr-auto">Reviews</h3>
@@ -68,14 +56,7 @@ class App extends Component {
           </div>
         </div>
         </main>
-
-      <footer>
-        <div className="container">
-          <p className="float-right">
-            <a href="#">Back to top</a>
-          </p>
-        </div>
-      </footer>
+        <Footer></Footer>
       </div>
     );
   }
