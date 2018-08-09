@@ -1,0 +1,36 @@
+a {
+    color: #b96f00;
+}
+a:hover {
+    color: #cc800d;
+}
+.ico-button {
+    background: #b96f00;
+    border: 1px solid #ced4da;
+    color: white;
+}
+.ico-button:hover, .ico-button:active {
+    background: #cc800d !important;
+    border: 1px solid #ced4da; 
+    color: white; 
+}
+.ico-button:focus {
+    box-shadow: 0 0 0 .2rem #ced4da;
+}
+.show > .btn-secondary.dropdown-toggle { 
+    color: #fff;
+    background-color: #cc800d;
+    border-color: #ced4da;
+}
+.show > .btn-secondary.dropdown-toggle:focus {
+	box-shadow: 0 0 0 .2rem #ced4da;
+}
+.highlight {
+    color: #b96f00;
+}
+.fa-star {
+    color: #b96f00;
+}
+.fa-star-half {
+    color: #b96f00;
+}
