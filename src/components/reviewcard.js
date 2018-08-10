@@ -21,7 +21,7 @@ export default class ReviewCard extends Component {
             }
             torender.push(halfstar);
         }
-        return torender;
+        return torender.map((i,index) => <span key={index}>{i}</span>);
     }
 
     render() {
