@@ -4,6 +4,8 @@ import './App.css';
 import ReviewCard from './components/reviewcard.js';
 import Navbar from './components/navbar.js';
 import Footer from './components/footer.js';
+import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
+
 class App extends Component {
   render() {
     return (
@@ -34,7 +36,7 @@ class App extends Component {
           <div className="container">
 
             <div className="row">
-              <ReviewCard title = "HyperNormalisation" postDate = "August 8, 2018" releaseYear = "2016" rating = "8">
+              <ReviewCard title = "Hypernormalisation" postDate = "August 8, 2018" releaseYear = "2016" rating = "8">
               </ReviewCard>
               <ReviewCard title = "Rope" postDate = "August 8, 2018" releaseYear = "1948" rating = "9">
               </ReviewCard>
@@ -56,6 +58,7 @@ class App extends Component {
           </div>
         </div>
         </main>
+        <ScrollUpButton />
         <Footer></Footer>
       </div>
     );
