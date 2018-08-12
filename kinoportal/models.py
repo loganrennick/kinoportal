@@ -6,5 +6,7 @@ class ReviewCard(models.Model):
     rating = models.IntegerField()
     postDate = models.DateField()
     releaseYear = models.IntegerField()
-    movieID = models.IntegerField()
     
+class Review(models.Model):
+    title = models.CharField(max_length=50)
+    entry = models.TextField()
