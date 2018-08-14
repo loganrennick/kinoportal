@@ -6,7 +6,49 @@ import Navbar from './components/navbar.js';
 import Footer from './components/footer.js';
 import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
 
+const list = [
+  {
+    "id": 1,
+    "title": "HyperNormalisation",
+    "rating": 8,
+    "postDate": "2018-08-11",
+    "releaseYear": 2016
+},
+{
+    "id": 2,
+    "title": "Blue Valentine",
+    "rating": 7,
+    "postDate": "2018-08-11",
+    "releaseYear": 2013
+},
+{
+    "id": 3,
+    "title": "Mulholland Drive",
+    "rating": 10,
+    "postDate": "2018-08-11",
+    "releaseYear": 2001
+}
+];
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { list };
+  }
+
+  formatDate(date) {
+    var monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+
+    var val = date.split("-");
+    
+    return monthNames[parseInt(val[1]) - 1] + " " + val[2] + ", " + val[0]
+  }
+
   render() {
     return (
       <div>
@@ -36,7 +78,10 @@ class App extends Component {
           <div className="container">
 
             <div className="row">
-              <ReviewCard title = "Hypernormalisation" postDate = "August 8, 2018" releaseYear = "2016" rating = "8">
+            {this.state.list.map(item =>(
+              <ReviewCard title = {item.title} postDate = {this.formatDate(item.postDate)} releaseYear = {item.releaseYear} rating = {item.rating} ></ReviewCard>
+            ))}
+              {/* <ReviewCard title = "Hypernormalisation" postDate = "August 8, 2018" releaseYear = "2016" rating = "8">
               </ReviewCard>
               <ReviewCard title = "Rope" postDate = "August 8, 2018" releaseYear = "1948" rating = "9">
               </ReviewCard>
@@ -53,7 +98,7 @@ class App extends Component {
               <ReviewCard title = "Mulholland Drive" postDate = "August 8, 2018" releaseYear = "2001" rating = "10">
               </ReviewCard>
               <ReviewCard title = "Blue Valentine" postDate = "August 8, 2018" releaseYear = "2010" rating = "7">
-              </ReviewCard>
+              </ReviewCard> */}
             </div>
           </div>
         </div>
