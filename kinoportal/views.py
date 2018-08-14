@@ -20,7 +20,6 @@ class ListReviewCard(generics.ListCreateAPIView):
     ordering_fields = '__all__'
     ordering = ('-postDate',)
 
-
 class DetailReviewCard(generics.RetrieveUpdateDestroyAPIView):
     queryset = ReviewCard.objects.all()
     serializer_class = ReviewCardSerializer

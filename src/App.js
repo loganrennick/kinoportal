@@ -1,39 +1,50 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ReviewCard from './components/reviewcard.js';
 import Navbar from './components/navbar.js';
 import Footer from './components/footer.js';
 import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 
-const list = [
-  {
-    "id": 1,
-    "title": "HyperNormalisation",
-    "rating": 8,
-    "postDate": "2018-08-11",
-    "releaseYear": 2016
-},
-{
-    "id": 2,
-    "title": "Blue Valentine",
-    "rating": 7,
-    "postDate": "2018-08-11",
-    "releaseYear": 2013
-},
-{
-    "id": 3,
-    "title": "Mulholland Drive",
-    "rating": 10,
-    "postDate": "2018-08-11",
-    "releaseYear": 2001
-}
-];
+const options = ['Newest Review','Oldest Review','Highest Rated','Lowest Rated','Newest Release','Oldest Release', 'Alphabetical (A>Z)','Alphabetical (Z>A)'];
+
+const params = {
+  "Newest Review": "-postDate",
+  "Oldest Review" : "postDate",
+  "Highest Rated" : "-rating",
+  "Lowest Rated" : "rating",
+  "Newest Release" : "-releaseYear",
+  "Oldest Release" : "releaseYear",
+  "Alphabetical (A>Z)" : "title",
+  "Alphabetical (Z>A)" : "-title" 
+};
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { list };
+  
+  constructor (props) {
+      super(props)
+      this.state = {
+        rc: [],
+        selected: options[0],
+      }
+      this._onSelect = this._onSelect.bind(this)
+  }
+
+  _onSelect (option) {
+      this.setState({selected: option});
+  }
+
+  async componentDidMount() {
+    try {
+      const res = await fetch('http://127.0.0.1:8000/api/rc');
+      const rc = await res.json();
+      this.setState({
+        rc
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   formatDate(date) {
@@ -43,10 +54,8 @@ class App extends Component {
       "August", "September", "October",
       "November", "December"
     ];
-
     var val = date.split("-");
-    
-    return monthNames[parseInt(val[1]) - 1] + " " + val[2] + ", " + val[0]
+    return monthNames[parseInt(val[1]) - 1] + " " + val[2] + ", " + val[0];
   }
 
   render() {
@@ -57,54 +66,24 @@ class App extends Component {
         <section>
           <div className="container mt-3 mb-3 d-flex">
             <h3 className="highlight mr-auto">Reviews</h3>
+            <h5 className="float-left highlight mt-2 mr-2">Sort</h5>
             <div className="dropdown float-right">
-              <h5 className="float-left highlight mt-2 mr-2">Sort</h5>
-              <button className="btn btn-secondary dropdown-toggle ico-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Newest
-              </button>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item" href="#">Oldest</a>
-                <a className="dropdown-item" href="#">Highest Rated</a>
-                <a className="dropdown-item" href="#">Lowest Rated</a>
-                <a className="dropdown-item" href="#">Release Year</a>
-                <a className="dropdown-item" href="#">Alphabetical (A>Z)</a>
-                <a className="dropdown-item" href="#">Alphabetical (Z>A)</a>
-              </div>
+              <Dropdown options={options} onChange={this._onSelect} value={options[0]} />
             </div>
           </div>
         </section>
-
         <div className="album py-5 bg-light">
           <div className="container">
-
             <div className="row">
-            {this.state.list.map(item =>(
-              <ReviewCard title = {item.title} postDate = {this.formatDate(item.postDate)} releaseYear = {item.releaseYear} rating = {item.rating} ></ReviewCard>
+            {this.state.rc.map(item =>(
+              <ReviewCard key = {item.id} title = {item.title} postDate = {this.formatDate(item.postDate)} releaseYear = {item.releaseYear} rating = {item.rating} />
             ))}
-              {/* <ReviewCard title = "Hypernormalisation" postDate = "August 8, 2018" releaseYear = "2016" rating = "8">
-              </ReviewCard>
-              <ReviewCard title = "Rope" postDate = "August 8, 2018" releaseYear = "1948" rating = "9">
-              </ReviewCard>
-              <ReviewCard title = "Stalker" postDate = "August 8, 2018" releaseYear = "1979" rating = "10">
-              </ReviewCard>
-              <ReviewCard title = "Forrest Gump" postDate = "August 8, 2018" releaseYear = "1994" rating = "3">
-              </ReviewCard>
-              <ReviewCard title = "Kimi no Na wa." postDate = "August 8, 2018" releaseYear = "2016" rating = "5">
-              </ReviewCard>
-              <ReviewCard title = "The Act of Killing" postDate = "August 8, 2018" releaseYear = "2012" rating = "8">
-              </ReviewCard>
-              <ReviewCard title = "Frozen" postDate = "August 8, 2018" releaseYear = "2013" rating = "6">
-              </ReviewCard>
-              <ReviewCard title = "Mulholland Drive" postDate = "August 8, 2018" releaseYear = "2001" rating = "10">
-              </ReviewCard>
-              <ReviewCard title = "Blue Valentine" postDate = "August 8, 2018" releaseYear = "2010" rating = "7">
-              </ReviewCard> */}
             </div>
           </div>
         </div>
         </main>
         <ScrollUpButton />
-        <Footer></Footer>
+        <Footer />
       </div>
     );
   }
