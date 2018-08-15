@@ -6,6 +6,7 @@ class ReviewCard(models.Model):
     rating = models.IntegerField()
     postDate = models.DateField()
     releaseYear = models.IntegerField()
+    thumbnail = models.URLField()
     
 class Review(models.Model):
     title = models.CharField(max_length=50)

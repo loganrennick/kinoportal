@@ -3,7 +3,6 @@ import './App.css';
 import ReviewCard from './components/reviewcard.js';
 import Navbar from './components/navbar.js';
 import Footer from './components/footer.js';
-import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
@@ -32,7 +31,22 @@ class App extends Component {
   }
 
   _onSelect (option) {
-      this.setState({selected: option});
+      this.setState({selected: option.value});
+      this.getReviews(option.value);
+  }
+  
+  async getReviews(sort) {
+    try {
+      let response = await fetch(
+        'http://127.0.0.1:8000/api/rc?ordering=' + params[sort]
+      );
+      let rc = await response.json();
+      this.setState({
+        rc
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async componentDidMount() {
@@ -68,7 +82,7 @@ class App extends Component {
             <h3 className="highlight mr-auto">Reviews</h3>
             <h5 className="float-left highlight mt-2 mr-2">Sort</h5>
             <div className="dropdown float-right">
-              <Dropdown options={options} onChange={this._onSelect} value={options[0]} />
+              <Dropdown options={options} onChange={this._onSelect} value={this.state.selected} />
             </div>
           </div>
         </section>
@@ -76,13 +90,12 @@ class App extends Component {
           <div className="container">
             <div className="row">
             {this.state.rc.map(item =>(
-              <ReviewCard key = {item.id} title = {item.title} postDate = {this.formatDate(item.postDate)} releaseYear = {item.releaseYear} rating = {item.rating} />
+              <ReviewCard key = {item.id} title = {item.title} postDate = {this.formatDate(item.postDate)} releaseYear = {item.releaseYear} rating = {item.rating} thumbnail = {item.thumbnail} />
             ))}
             </div>
           </div>
         </div>
         </main>
-        <ScrollUpButton />
         <Footer />
       </div>
     );

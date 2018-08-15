@@ -28,7 +28,7 @@ export default class ReviewCard extends Component {
         return (  
             <div className="col-md-4">
                 <div className="card mb-4 shadow-sm">
-                    <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card cap"/>
+                    <img className="card-img-top" src= {this.props.thumbnail}alt="Card cap" />
                     <div className="card-body">
                         <div className="d-flex align-items-center">
                             <h5><a href="#">{this.props.title}</a></h5>

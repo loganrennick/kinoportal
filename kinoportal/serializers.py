@@ -19,5 +19,6 @@ class ReviewCardSerializer(serializers.ModelSerializer):
             'rating',
             'postDate', 
             'releaseYear',
+            'thumbnail',
         )
         model = ReviewCard
