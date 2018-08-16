@@ -6,7 +6,7 @@ import ReviewFeed from './ReviewFeed';
 const Main = () => (
     <Switch>
       <Route exact path='/' component={ReviewFeed}/>
-      <Route path='/review/:id' component={Review}/>
+      <Route path='/review/:id/:title' component={Review}/>
     </Switch>
   )
   

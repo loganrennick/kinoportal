@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default class Navbar extends Component {
     render() {
         return (  
             <header>
                 <div className="navbar shadow-sm">
-                    <a href="#" className="navbar-brand mr-auto">
-                    <h1><strong>KinoPortal</strong></h1>
-                    </a>
+                    <h1><strong><NavLink to='/'>KinoPortal</NavLink></strong></h1>
                     <form className="form-inline mt-20 mt-md-0">
                     <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"/>
                     <div className="input-group-append">

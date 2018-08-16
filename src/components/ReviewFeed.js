@@ -3,7 +3,6 @@ import ReviewCard from './reviewcard';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-
 const options = ['Newest Review','Oldest Review','Highest Rated','Lowest Rated','Newest Release','Oldest Release', 'Alphabetical (A>Z)','Alphabetical (Z>A)'];
 
 const params = {

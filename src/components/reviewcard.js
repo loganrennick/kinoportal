@@ -29,10 +29,10 @@ export default class ReviewCard extends Component {
         return (  
             <div className="col-md-4">
                 <div className="card mb-4 shadow-sm">
-                    <img className="card-img-top" src= {this.props.thumbnail}alt="Card cap" />
+                    <img className="card-img-top" src= {this.props.thumbnail} alt="Card cap" />
                     <div className="card-body">
                         <div className="d-flex align-items-center">
-                            <h5><NavLink to={`/review/${this.props.id}`}>{this.props.title}</NavLink></h5>
+                            <h5><NavLink to={`/review/${this.props.id}/${this.props.title}`}>{this.props.title}</NavLink></h5>
                             <small className="text-muted ml-2 mb-1">{this.props.releaseYear}</small>
                         </div>
                         <div className="d-flex justify-content-between align-items-center">
