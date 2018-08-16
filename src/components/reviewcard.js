@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default class ReviewCard extends Component {
     
@@ -31,7 +32,7 @@ export default class ReviewCard extends Component {
                     <img className="card-img-top" src= {this.props.thumbnail}alt="Card cap" />
                     <div className="card-body">
                         <div className="d-flex align-items-center">
-                            <h5><a href="#">{this.props.title}</a></h5>
+                            <h5><NavLink to={`/review/${this.props.id}`}>{this.props.title}</NavLink></h5>
                             <small className="text-muted ml-2 mb-1">{this.props.releaseYear}</small>
                         </div>
                         <div className="d-flex justify-content-between align-items-center">
