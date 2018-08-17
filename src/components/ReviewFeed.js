@@ -23,7 +23,7 @@ export default class ReviewFeed extends Component {
   constructor (props) {
       super(props);
       this.state = {
-        query: props.match.params.query,
+        query: props.location.search,
         rc: [],
         previous: "", 
         next: "",
@@ -51,7 +51,7 @@ export default class ReviewFeed extends Component {
   async getSearch(search) {
     try {
         this.setState({query: search});
-        const res = await fetch('http://127.0.0.1:8000/api/rc?search=' + search);
+        const res = await fetch('http://127.0.0.1:8000/api/rc' + search);
         const data = await res.json();
         this.setState({
           rc: data.results, previous: data.previous, next:data.next
@@ -79,7 +79,7 @@ export default class ReviewFeed extends Component {
   async componentDidMount() {
     try {
       if (this.state.query) {
-        const res = await fetch('http://127.0.0.1:8000/api/rc?search=' + this.state.query);
+        const res = await fetch('http://127.0.0.1:8000/api/rc' + this.state.query);
         const data = await res.json();
         this.setState({
           rc : data.results, previous: data.previous, next:data.next
@@ -97,8 +97,6 @@ export default class ReviewFeed extends Component {
     }
   }
 
-
-
   formatDate(date) {
     var monthNames = [
       "January", "February", "March",
@@ -107,12 +105,52 @@ export default class ReviewFeed extends Component {
       "November", "December"
     ];
     var val = date.split("-");
-    return monthNames[parseInt(val[1]) - 1] + " " + val[2] + ", " + val[0];
+    return monthNames[parseInt(val[1],10) - 1] + " " + val[2] + ", " + val[0];
+  }
+
+  handleSubheader(subhead) {
+    let newsubhead = "";
+    console.log("hi");
+    const offset = /[?]offset=\d/;
+    const offset2 = /[?]offset=/;
+    const search = "&search=";
+    const search2 = "?search=";
+    if (offset.test(subhead)) {
+      let myoffset = String(subhead.match(offset));
+      newsubhead = subhead.replace(offset,"");
+      console.log(myoffset);
+      let num = parseInt(myoffset.replace(offset2, ""),10);
+      console.log(num);
+      if (newsubhead.includes(search)) {
+        newsubhead = newsubhead.replace(search, "");
+        return newsubhead;
+      }
+    } 
+    else if (subhead.includes(search2)) {
+      return subhead.replace(search2,"");
+    }
+    else {
+      return subhead;
+    }
+  }
+
+  checkQuery() {
+    if (this.state.query){
+      if (this.state.query.includes("search=")) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
   }
 
   render() {
-    const hide = this.state.query ? {display:'none'} : {};
-    const nohide = this.state.query ? {} : {display:'none'};
+    const hide = this.checkQuery() ? {display:'none'} : {};
+    const nohide = this.checkQuery() ? {} : {display:'none'};
     return (
       <div>
       <Navbar handleQueryChange={this.handleQueryChange} clearQuery={this.clearQuery}/>
@@ -120,7 +158,7 @@ export default class ReviewFeed extends Component {
         <section>
           <div className="container mt-3 mb-3 d-flex">
             <h3 style = {hide} className="highlight mr-auto">Reviews</h3>
-            <h3 style = {nohide} className="highlight mr-auto">Results for: '{this.state.query}'</h3>
+            <h3 style = {nohide} className="highlight mr-auto">Results for: '{this.handleSubheader(this.state.query)}'</h3>
             <div style = {hide}>
             <h5 className="float-left highlight mt-2 mr-2">Sort</h5>
             <div className="dropdown float-right">
@@ -139,7 +177,7 @@ export default class ReviewFeed extends Component {
           </div>
         </div>
         </main>
-        <Footer />
+        <Footer handleQueryChange={this.handleQueryChange} previous={this.state.previous} next={this.state.next}/>
       </div>
     );
   }

@@ -19,10 +19,8 @@ export default class Navbar extends Component {
         event.preventDefault();
         if(this.props.clearQuery){
             this._onSelect();
-            console.log("query");
             if(this.props.handleQueryChange){
-                console.log("input");
-                this.props.handleQueryChange(this.state.query);
+                this.props.handleQueryChange("?search=" + this.state.query);
             }
         }
         else {
@@ -39,7 +37,7 @@ export default class Navbar extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect push to={"/" + this.state.query} />;
+            return <Redirect push to={"/?search=" + this.state.query} />;
           }
         return (  
             <header>

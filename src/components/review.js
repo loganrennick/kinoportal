@@ -77,7 +77,7 @@ export default class Review extends Component {
           "November", "December"
         ];
         var val = date.split("-");
-        return monthNames[parseInt(val[1]) - 1] + " " + val[2] + ", " + val[0];
+        return monthNames[parseInt(val[1],10) - 1] + " " + val[2] + ", " + val[0];
       }
 
     render() {

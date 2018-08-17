@@ -66,3 +66,6 @@ body {
 .page-link:hover {
     color: #cc800d;
 }
+footer {
+    padding-top: 2rem !important;
+}
