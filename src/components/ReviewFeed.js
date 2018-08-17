@@ -3,6 +3,7 @@ import ReviewCard from './reviewcard';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import Navbar from './navbar.js';
+import Footer from './footer';
 
 const options = ['Newest Review','Oldest Review','Highest Rated','Lowest Rated','Newest Release','Oldest Release', 'Alphabetical (A>Z)','Alphabetical (Z>A)'];
 
@@ -24,6 +25,8 @@ export default class ReviewFeed extends Component {
       this.state = {
         query: props.match.params.query,
         rc: [],
+        previous: "", 
+        next: "",
         selected: options[0],
       };
       this._onSelect = this._onSelect.bind(this);
@@ -49,9 +52,9 @@ export default class ReviewFeed extends Component {
     try {
         this.setState({query: search});
         const res = await fetch('http://127.0.0.1:8000/api/rc?search=' + search);
-        const rc = await res.json();
+        const data = await res.json();
         this.setState({
-          rc
+          rc: data.results, previous: data.previous, next:data.next
         });
     } catch (error) {
       console.error(error);
@@ -63,9 +66,9 @@ export default class ReviewFeed extends Component {
         let response = await fetch(
           'http://127.0.0.1:8000/api/rc?ordering=' + params[sort]
         );
-        let rc = await response.json();
+        let data = await response.json();
         this.setState({
-          rc
+          rc : data.results, previous: data.previous, next:data.next
         });
       }
      catch (error) {
@@ -77,16 +80,16 @@ export default class ReviewFeed extends Component {
     try {
       if (this.state.query) {
         const res = await fetch('http://127.0.0.1:8000/api/rc?search=' + this.state.query);
-        const rc = await res.json();
+        const data = await res.json();
         this.setState({
-          rc
+          rc : data.results, previous: data.previous, next:data.next
         });
       }
       else {
         const res = await fetch('http://127.0.0.1:8000/api/rc');
-        const rc = await res.json();
+        const data = await res.json();
         this.setState({
-          rc
+          rc : data.results, previous: data.previous, next:data.next
         });
       }
     } catch (e) {
@@ -136,6 +139,7 @@ export default class ReviewFeed extends Component {
           </div>
         </div>
         </main>
+        <Footer />
       </div>
     );
   }

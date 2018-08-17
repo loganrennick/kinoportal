@@ -4,6 +4,7 @@ import ReviewTitle from './reviewtitle';
 import ReviewSidebar from './reviewsidebar';
 import {api_stor} from '../config.js';
 import Navbar from './navbar.js';
+import Footer from './footer';
 
 export default class Review extends Component {
     constructor (props) {
@@ -97,7 +98,8 @@ export default class Review extends Component {
                         ))}
                     </div>
                 </div>
-                </div>       
+                </div>     
+                <Footer />  
                 </main>
         )
     }
