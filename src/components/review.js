@@ -3,6 +3,7 @@ import ReviewBody from './reviewbody';
 import ReviewTitle from './reviewtitle';
 import ReviewSidebar from './reviewsidebar';
 import {api_stor} from '../config.js';
+import Navbar from './navbar.js';
 
 export default class Review extends Component {
     constructor (props) {
@@ -81,10 +82,12 @@ export default class Review extends Component {
     render() {
         return (  
             <main role="main">
+            <Navbar />
                 {this.state.rc.map(item =>(
                         <ReviewTitle key = {item.id} title = {item.title} releaseYear = {item.releaseYear} />
                         ))}
-                <div className="container">
+                <div className="bg-light">
+                <div className="bg-white container">
                     <div className="row">
                         {this.state.r.map(item =>(
                         <ReviewBody key = {item.id} id = {item.id} title = {item.title} postDate = {this.formatDate(item.postDate)} releaseYear = {item.releaseYear} rating = {item.rating} thumbnail = {item.thumbnail} entry = {item.entry}/>
@@ -94,7 +97,7 @@ export default class Review extends Component {
                         ))}
                     </div>
                 </div>
-
+                </div>       
                 </main>
         )
     }
