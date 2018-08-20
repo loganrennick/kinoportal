@@ -110,17 +110,10 @@ export default class ReviewFeed extends Component {
 
   handleSubheader(subhead) {
     let newsubhead = "";
-    console.log("hi");
     const offset = /[?]offset=\d/;
-    const offset2 = /[?]offset=/;
     const search = "&search=";
     const search2 = "?search=";
     if (offset.test(subhead)) {
-      let myoffset = String(subhead.match(offset));
-      newsubhead = subhead.replace(offset,"");
-      console.log(myoffset);
-      let num = parseInt(myoffset.replace(offset2, ""),10);
-      console.log(num);
       if (newsubhead.includes(search)) {
         newsubhead = newsubhead.replace(search, "");
         return newsubhead;

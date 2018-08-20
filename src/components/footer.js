@@ -24,14 +24,14 @@ export default class Footer extends Component {
     }
 
     handlePrevious(event){
-        event.preventDefault
+        event.preventDefault();
         if(this.props.handleQueryChange){
             this.props.handleQueryChange(this.removeHeader(this.props.previous));
         }
     }
 
     handleNext(event){
-        event.preventDefault
+        event.preventDefault();
         if(this.props.handleQueryChange){
             this.props.handleQueryChange(this.removeHeader(this.props.next));
         }
@@ -40,7 +40,6 @@ export default class Footer extends Component {
     render() {
         const hidep = this.props.previous ? "" : " disabled";
         const hiden = this.props.next ? "" : " disabled";
-        const hidepn = (hidep) ?  "" : "d-none";
         const hide = (!this.props.previous && !this.props.next) ? "d-none" : "";
         return (  
             <footer>

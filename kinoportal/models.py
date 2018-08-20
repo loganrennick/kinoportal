@@ -8,11 +8,11 @@ class ReviewCard(models.Model):
     releaseYear = models.IntegerField()
     thumbnail = models.URLField()
     def __str__(self):
-        return self.title;
+        return self.title + " card";
 
     
 class Review(models.Model):
     title = models.CharField(max_length=50)
     entry = models.TextField()
     def __str__(self):
-        return self.title;
+        return self.title + " review";
