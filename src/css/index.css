@@ -1,0 +1,71 @@
+a {
+    color: #b96f00;
+}
+a:hover {
+    color: #cc800d;
+}
+.ico-button {
+    background: #b96f00;
+    border: 1px solid #ced4da;
+    color: white;
+}
+.ico-button:hover, .ico-button:active {
+    background: #cc800d !important;
+    border: 1px solid #ced4da; 
+    color: white; 
+}
+.ico-button:focus {
+    box-shadow: 0 0 0 .2rem #ced4da;
+}
+.show > .btn-secondary.dropdown-toggle { 
+    color: #fff;
+    background-color: #cc800d;
+    border-color: #ced4da;
+}
+.show > .btn-secondary.dropdown-toggle:focus {
+	box-shadow: 0 0 0 .2rem #ced4da;
+}
+.highlight {
+    color: #b96f00;
+}
+.fa-star {
+    color: #b96f00;
+}
+.fa-star-half {
+    color: #b96f00;
+}
+body {
+    font-family: 'Merriweather', serif;
+    margin: 0;
+    padding: 0;
+  }
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+.subhead {
+    background: #b96f00;
+    color: white;
+    margin-bottom: 0px;
+    padding: .25em;
+}
+.info {
+    margin-bottom: 0px;
+    padding: .25em;
+}
+.head {
+    background: black;
+    color: white;
+    margin-bottom: 0px;
+    padding: .25em;
+}
+.page-link {
+    color: #b96f00;
+}
+.page-link:hover {
+    color: #cc800d;
+}
+footer {
+    padding-top: 2rem !important;
+}

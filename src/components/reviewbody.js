@@ -35,7 +35,7 @@ export default class ReviewBody extends Component {
                                 <small className="text-muted">{this.props.postDate}</small>
                             </div>
                             <div>
-                                {this.props.entry}
+                                    {this.props.entry.split('\n').map((i,index) => <p key = {index}>{i}</p>)}  
                             </div>
                         </div>
         )

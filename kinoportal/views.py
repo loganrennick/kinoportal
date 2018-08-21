@@ -1,5 +1,4 @@
 from rest_framework import generics
-
 from .models import Review, ReviewCard
 from .serializers import ReviewSerializer, ReviewCardSerializer
 from rest_framework.filters import OrderingFilter, SearchFilter
